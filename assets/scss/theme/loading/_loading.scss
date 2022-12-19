@@ -1,0 +1,27 @@
+@mixin loading() {
+    &_loading {
+        @include absoluteCenter;
+        @include containerFull;
+        @include flex;
+        gap: 10px;
+
+        .loading_bar {
+            width: 20px;
+            height: 20px;
+            background-color: $color-tertiary;
+
+            @include animation(loading-bar, (
+                (transform: scaleY(1)),
+                (transform: scaleY(2.5), opacity: 0.7),
+                (transform: scaleY(1)),
+                (transform: scaleY(1))
+            ));
+
+            @for $i from 1 through 3 {
+                &.bar#{$i} {
+                    animation-delay: calc(0.1s * $i);
+                }
+            }
+        }
+    }
+}

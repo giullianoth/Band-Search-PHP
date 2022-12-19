@@ -1,0 +1,27 @@
+@include darkTheme() {
+    &_main {
+        &_content {
+            &_form {
+                form {
+                    .label_area {
+                        input {
+                            color: $color-highlight;
+                        }
+
+                        .bottom_bar {
+                            background-color: $color-highlight;
+                        }
+                    }
+                }
+            }
+
+            &_results {
+                &_list {
+                    &::-webkit-scrollbar-thumb {
+                        background-color: $color-highlight;
+                    }
+                }
+            }
+        }
+    }
+}

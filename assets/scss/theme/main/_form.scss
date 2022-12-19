@@ -1,0 +1,156 @@
+@mixin form() {
+    &_form {
+        height: 100%;
+        @include flex;
+        @include transition;
+
+        form {
+            @include flex1;
+            @include flex;
+
+            @include setResponsiveDesign(480px) {
+                @include container(480px);
+                padding: 0;
+            }
+
+            .label_area {
+                @include flex1;
+                @include relative;
+                display: block;
+                margin-bottom: 20px;
+
+                input {
+                    @include containerFull;
+                    padding: 10px 0;
+                    display: block;
+                    font-family: inherit;
+                    color: inherit;
+
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+
+                    @include transition;
+
+                    @include setResponsiveDesign(480px) {
+                        font-size: $font-size-default;
+                    }
+
+                    &:valid, &:focus {
+                        & ~ label {
+                            top: -100%;
+
+                            @include setResponsiveDesign(480px) {
+                                font-size: $font-size-small;
+                            }
+                        }
+
+                        & ~ .bottom_bar {
+                            transform: scaleX(1);
+                        }
+                    }
+                }
+
+                label {
+                    @include absoluteFull;
+                    @include flex(flex-start);
+                    font-size: $font-size-small;
+                    font-weight: 700;
+                    cursor: pointer;
+
+                    @include transition;
+
+                    @include setResponsiveDesign(480px) {
+                        font-size: $font-size-default;
+                    }
+                }
+
+                .bottom_bar {
+                    @include absolute(unset);
+                    bottom: 0;
+                    width: 100%;
+                    height: 3px;
+
+                    background-color: $color-shadow;
+                    display: block;
+                    transform-origin: left;
+                    transform: scaleX(0);
+
+                    @include transition;
+                }
+            }
+
+            button {
+                @include flex1;
+                @include button;
+
+                @include setResponsiveDesign(480px) {
+                    font-size: $font-size-big;
+                }
+            }
+        }
+
+        &.list {
+            // height: auto;
+            max-height: 40px !important;
+
+            @include setResponsiveDesign(720px) {
+                justify-content: flex-start;
+            }
+
+            form {
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 10px;
+
+                @include setResponsiveDesign(480px) {
+                    max-width: unset;
+                }
+                
+                @include setResponsiveDesign(720px) {
+                    @include flex2;
+                    margin: 0;
+                }
+
+                @include setResponsiveDesign(1024px) {
+                    @include flexBasis(40%);
+                }
+
+                .label_area {
+                    @include flex2(10px);
+                    margin-bottom: 0;
+
+                    label {
+                        font-size: 0.7em;
+                        font-weight: 400;
+
+                        @include setResponsiveDesign(1200px) {
+                            font-size: $font-size-small;
+                        }
+                    }
+
+                    input {
+                        &:valid, &:focus {
+                            & ~ label {
+                                top: 0;
+                                visibility: hidden;
+                                opacity: 0;
+                                font-size: 0.7em;
+                                
+                                @include setResponsiveDesign(1200px) {
+                                    font-size: $font-size-small;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                button {
+                    @include flex2(10px);
+                    font-size: $font-size-small;
+                }
+            }
+        }
+    }
+}

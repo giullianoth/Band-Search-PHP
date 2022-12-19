@@ -1,0 +1,9 @@
+@include darkTheme() {
+    &_footer {
+        p {
+            a {
+                color: $color-highlight;
+            }
+        }
+    }
+}

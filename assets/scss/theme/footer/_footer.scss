@@ -1,0 +1,23 @@
+@import "../dark-theme/footer";
+
+@include theme() {
+    &_footer {
+        @include containerFull;
+        padding: 20px 0;
+
+        p {
+            text-align: center;
+            font-size: $font-size-small;
+
+            a {
+                color: $color-shadow;
+                font-weight: 700;
+                @include transition;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

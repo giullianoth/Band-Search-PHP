@@ -1,0 +1,21 @@
+@import "../loading/loading";
+@import "form";
+@import "band-list";
+@import "../dark-theme/main";
+@import "../error/error";
+
+@include theme() {
+    &_main {
+        @include containerFull;
+
+        &_content {
+            @include container;
+            height: 100%;
+            
+            @include loading;
+            @include form;
+            @include bandList;
+            @include error;
+        }
+    }
+}

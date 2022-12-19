@@ -1,0 +1,82 @@
+@mixin switchTheme() {
+    &_switch_theme {
+        @include relative;
+
+        .switch {
+            width: 40px;
+            height: 20px;
+            background-color: $color-shadow;
+            cursor: pointer;
+
+            @include borderRadius(20px);
+            @include transition;
+
+            @include setResponsiveDesign (480px) {
+                width: 60px;
+                height: 30px;
+                @include borderRadius(30px);
+            }
+
+            &::before {
+                content: "";
+                @include absolute;
+
+                width: 20px;
+                height: 20px;
+                background-color: $color-highlight;
+                border: 2px solid $color-shadow;
+
+                @include rounded;
+                @include transition;
+
+                @include setResponsiveDesign (480px) {
+                    width: 30px;
+                    height: 30px;
+                    border-width: 4px;
+                }
+            }
+
+            &:hover ~ .card {
+                display: block;
+            }
+        }
+
+        .card {
+            @include absolute(180%, 50%);
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            border: 2px solid $color-shadow;
+            background-color: $color-shadow;
+            z-index: 1;
+
+            display: none;
+
+            @include rounded;
+            @include transition;
+
+            &::before {
+                content: "";
+                width: 20px;
+                height: 20px;
+                background-color: $color-shadow;
+
+                @include absolute(-8px, 50%);
+                transform: translateX(-50%) rotate(45deg);
+
+                @include transition;
+            }
+
+            &_img {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+
+                @include rounded;
+                @include relative;
+                @include bgImage;
+                z-index: 2;
+            }
+        }
+    }
+}

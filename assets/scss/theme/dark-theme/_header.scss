@@ -1,0 +1,26 @@
+@include darkTheme() {
+    &_header {
+        &_content {
+            &_switch_theme {
+                .switch {
+                    background-color: $color-highlight;
+
+                    &::before {
+                        background-color: $color-shadow;
+                        border-color: $color-highlight;
+                        transform: translateX(100%);
+                    }
+                }
+
+                .card {
+                    border-color: $color-highlight;
+                    background-color: $color-highlight;
+
+                    &::before {
+                        background-color: $color-highlight;
+                    }
+                }
+            }
+        }
+    }
+}

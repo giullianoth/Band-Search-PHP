@@ -1,0 +1,12 @@
+@mixin error() {
+    &_error {
+        @include flex;
+        height: 100%;
+        font-size: $font-size-big;
+        font-weight: 700;
+
+        p {
+            text-align: center;
+        }
+    }
+}

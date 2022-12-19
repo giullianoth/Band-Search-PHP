@@ -1,0 +1,52 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    
+    @include setBrowsers(box-sizing, border-box);
+}
+
+body {
+    background-color: $color-highlight;
+    color: $color-shadow;
+
+    font-family: $font-montserrat;
+
+    @include relative;
+    @include bgImage("../images/background.png");
+    @include transition;
+
+    &.dark_theme {
+        background-color: $color-shadow;
+        color: $color-white;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+    }
+
+    // embed, video, iframe, iframe[style] {
+    //     max-width: 100%;
+    //     height: auto;
+    // }
+}
+
+@mixin theme() {
+    .bs {
+        @content;
+    }
+}
+
+@mixin darkTheme() {
+    .dark_theme {
+        @include theme() {
+            @content;
+        }
+    }
+}
+
+@import "../theme/modal/modal";

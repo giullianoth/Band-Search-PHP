@@ -1,0 +1,19 @@
+@import "logo";
+@import "switch-theme";
+@import "../dark-theme/header";
+
+@include theme() {
+    &_header {
+        @include containerFull;
+        padding: 20px 0;
+
+        &_content {
+            @include container;
+
+            @include flex(space-between);
+
+            @include logo;
+            @include switchTheme;
+        }
+    }
+}

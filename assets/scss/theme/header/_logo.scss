@@ -1,0 +1,16 @@
+@mixin logo() {
+    &_logo {
+        h1 {
+            display: none;
+        }
+
+        img {
+            width: 120px;
+            @include transition;
+
+            @include setResponsiveDesign(480px) {
+                width: 160px;
+            }
+        }
+    }
+}

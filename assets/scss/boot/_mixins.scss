@@ -1,0 +1,247 @@
+// FONTS
+@mixin set-fonts($fontList: $fonts) {
+    @each $presets in $fontList {
+
+        $weight: ();
+        $family: ();
+        $files: ();
+        $path: ();
+        $format: ();
+    
+        @each $attr, $values in $presets {
+    
+            @if $attr =="weights" {
+                @for $w from 1 through length($list: $values) {
+                    $weight: append($list: $weight, $val: nth($list: $values, $n: $w), $separator: comma);
+                }
+            }
+    
+            @if $attr =="family" {
+                @for $f from 1 through length($list: $weight) {
+                    $family: append($list: $family, $val: $values, $separator: comma);
+                }
+            }
+    
+            @if $attr =="files" {
+                @for $fl from 1 through length($list: $weight) {
+                    $files: append($list: $files, $val: nth($list: $values, $n: $fl), $separator: comma);
+                }
+            }
+    
+            @if $attr =="path" {
+                @for $p from 1 through length($list: $weight) {
+                    $path: append($list: $path, $val: "#{$font-path}/#{$values}/#{nth($list: $files, $n: $p)}", $separator: comma);
+                }
+            }
+    
+            @if $attr =="format" {
+                @for $fm from 1 through length($list: $weight) {
+                    $format: append($list: $format, $val: $values, $separator: comma);
+                }
+            }
+        }
+    
+        @for $font from 1 through length($list: $weight) {
+            @font-face {
+                font-family: nth($list: $family, $n: $font);
+                src: url(nth($list: $path, $n: $font)) format(nth($list: $format, $n: $font));
+                font-weight: nth($list: $weight, $n: $font);
+            }
+        }
+    }
+}
+
+// CONTAINER WIDTH
+@mixin container($maxWidth: $container-max-width) {
+    max-width: $maxWidth;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+@mixin containerFull() {
+    width: 100%;
+}
+
+// BROWSERS
+@mixin setBrowsers($attr, $value, $browsers: $browsers-default) {
+    #{$attr}: #{$value};
+
+    @each $browser in $browsers {
+        -#{$browser}-#{$attr}: #{$value};
+    }
+}
+
+// BORDER RADIUS
+@mixin borderRadius($radius: $radius-default) {
+    @include setBrowsers(border-radius, $radius);
+}
+
+@mixin rounded() {
+    @include borderRadius(100%);
+}
+
+// FLEXBOX
+@mixin flex($justifyContent: center, $alignItems: center, $flexWrap: wrap) {
+    display: flex;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+    flex-wrap: $flexWrap;
+}
+
+@mixin flexBasis($basis, $gap: 0) {
+    @if $gap !=0 {
+        flex-basis: calc($basis - $gap);
+    }
+
+    @else {
+        flex-basis: $basis;
+    }
+}
+
+@mixin flex1($gap: 0) {
+    @include flexBasis(100%, $gap);
+}
+
+@mixin flex2($gap: 0) {
+    @include flexBasis(calc(100% / 2), $gap);
+}
+
+@mixin flex3($gap: 0) {
+    @include flexBasis(calc(100% / 3), $gap);
+}
+
+@mixin flex4($gap: 0) {
+    @include flexBasis(calc(100% / 4), $gap);
+}
+
+// POSITION
+// Relative
+@mixin relative() {
+    position: relative;
+}
+
+// Absolute
+@mixin absolute($top: 0, $left: 0) {
+    position: absolute;
+    top: $top;
+    left: $left;
+}
+
+@mixin absoluteFull() {
+    @include absolute;
+    width: 100%;
+    height: 100%;
+}
+
+@mixin absoluteCenter() {
+    @include absolute(50%, 50%);
+    transform: translate(-50%, -50%);
+}
+
+// Fixed
+@mixin fixed($top: 0, $left: 0) {
+    position: fixed;
+    top: $top;
+    left: $left;
+}
+
+@mixin fixedFull() {
+    @include fixed;
+    width: 100%;
+    height: 100%;
+}
+
+// TRANSITION
+@mixin transition($property: all, $duration: 0.5s, $timingFunction: ease, $delay: 0s) {
+    transition: $property $duration $timingFunction $delay;
+}
+
+// BACKGROUND IMAGE
+@mixin bgImage($path: "", $repeat: no-repeat, $size: cover, $position: center center) {
+    @if $path  != "" {
+        background-image: url($path);
+    }
+
+    background-repeat: $repeat;
+    background-size: $size;
+    background-position: $position;
+}
+
+// EMBEDDED CONTAINER
+@mixin embedded() {
+    @include relative;
+	max-width: 100%;
+	height: 0;
+	padding-bottom: 56.25%;
+	overflow: hidden;
+}
+
+// ANIMATION
+@mixin animation($name, $setup, $animation-duration: 1s, $animation-iteration-count: infinite, $animation-timing-function: ease-in-out) {
+    animation: $name $animation-duration $animation-iteration-count $animation-timing-function;
+    
+    @keyframes #{$name} {
+        @for $i from 1 through length($list: $setup) {
+
+            $frame: calc((($i * 100%) / (length($list: $setup) - 1)) - (100% / (length($list: $setup) - 1)));
+            
+            #{$frame} {
+                @each $attr, $value in nth($list: $setup, $n: $i) {
+                    #{$attr}: #{$value};
+                }
+            }
+        }
+    }
+}
+
+// RESPONSIVE DESIGN - Mobile First
+@mixin setResponsiveDesign($screenWidth) {
+    @media screen and (min-width: $screenWidth) {
+        @content;
+    }
+}
+
+// BUTTON
+@mixin button() {
+    display: inline-block;
+    padding: 10px;
+
+    font-size: $font-size-default;
+    font-family: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $color-white;
+
+    border: none;
+    background-color: $color-tertiary;
+    cursor: pointer;
+    overflow: hidden;
+
+    @include relative;
+
+    &::before {
+        content: "";
+        @include absolute(-100%, -25%);
+        width: 10%;
+        height: 250%;
+        opacity: 0.7;
+
+        transform: rotate(20deg);
+        filter: blur(10px);
+
+        background-color: $color-white;
+
+        @include transition;
+    }
+
+    &:hover::before {
+        left: 120%;
+    }
+
+    svg {
+        @include setResponsiveDesign(375px) {
+            margin-right: 5px;
+        }
+    }
+}

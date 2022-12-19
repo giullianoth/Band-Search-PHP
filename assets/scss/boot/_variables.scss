@@ -1,0 +1,56 @@
+// COLORS
+$color-black: #000;
+$color-white: #FFF;
+
+$color-primary:   #F20505;
+$color-secondary: #1C228C;
+$color-tertiary:  #593622;
+
+$color-highlight: #F2F2F2;
+$color-shadow:    #0D0D0D;
+$color-modal: #000000b3;
+
+// FONT CONFIG
+$font-size-default: 1rem;
+$font-size-small: 0.8rem;
+$font-size-big:   1.4rem;
+
+$font-path: "../../fonts";
+
+// Montserrat
+$font-montserrat: 'Montserrat', sans-serif;
+$font-preset-montserrat: (
+    weights: (300, 400, 500, 700),
+    family: $font-montserrat,
+    files: ("Montserrat-Light.ttf", "Montserrat-Regular.ttf", "Montserrat-Medium.ttf", "Montserrat-Bold.ttf"),
+    path: ("Montserrat/static"),
+    format: ("truetype")
+);
+
+// Kaushan Script
+$font-kaushan: 'Kaushan Script', cursive;
+$font-preset-kaushan: (
+    weights: 400,
+    family: $font-kaushan,
+    files: ("KaushanScript-Regular.ttf"),
+    path: ("Kaushan_Script"),
+    format: ("truetype")
+);
+
+$fonts: $font-preset-montserrat, $font-preset-kaushan;
+
+// LOADING BARS
+$loading-bars-length:   3;
+$loading-bars-delay: 0.2s;
+$loading-width:      80px;
+$loading-gap:         2px;
+$loading-time:         1s;
+
+// CONTAINER DIMENSIONS
+$container-max-width: 1300px;
+
+// FORM SETTINGS
+$input-default-padding: 8px 36px;
+
+// BROWSER CORES
+$browsers-default: ("moz", "webkit");
